@@ -11,7 +11,7 @@
 }:
 stdenv.mkDerivation {
   pname = "linear-feedback-controller-msgs";
-  version = "0.1.3";
+  version = "1.0.0";
 
   src = src-linear-feedback-controller-msgs;
 

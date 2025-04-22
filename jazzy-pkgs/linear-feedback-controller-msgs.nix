@@ -14,10 +14,12 @@
   ament-cmake-flake8,
   ament-cmake-pep257,
   ament-cmake-uncrustify,
-  rosidl-default-generators,
 
   # propagatedBuildInputs
+  builtin-interfaces,
   geometry-msgs,
+  rosidl-default-generators,
+  rosidl-default-runtime,
   sensor-msgs,
   tf2-eigen,
 }:
@@ -36,19 +38,21 @@ stdenv.mkDerivation (finalAttrs: {
     cmake
     eigen
     python3Packages.python
+  ];
+
+  propagatedBuildInputs = [
     ament-cmake
     ament-cmake-cppcheck
     ament-cmake-cpplint
     ament-cmake-flake8
     ament-cmake-pep257
     ament-cmake-uncrustify
-    rosidl-default-generators
-  ];
-
-  propagatedBuildInputs = [
+    builtin-interfaces
     geometry-msgs
     sensor-msgs
     tf2-eigen
+    rosidl-default-generators
+    rosidl-default-runtime
   ];
 
   doCheck = true;

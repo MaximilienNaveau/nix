@@ -71,14 +71,6 @@
       url = "github:Gepetto/gepetto-viewer/devel";
       flake = false;
     };
-    src-linear-feedback-controller = {
-      url = "github:loco-3d/linear-feedback-controller";
-      flake = false;
-    };
-    src-linear-feedback-controller-jazzy = {
-      url = "github:loco-3d/linear-feedback-controller/jazzy";
-      flake = false;
-    };
     src-toolbox-parallel-robots = {
       url = "github:gepetto/toolbox-parallel-robots";
       flake = false;
@@ -159,7 +151,6 @@
                 inherit (inputs)
                   # keep-sorted start
                   src-agimus-msgs
-                  src-linear-feedback-controller
                   # keep-sorted end
                   ;
                 franka-description = humble-prev.franka-description.overrideAttrs {
@@ -179,7 +170,6 @@
                 inherit (inputs)
                   # keep-sorted start
                   src-agimus-msgs
-                  src-linear-feedback-controller-jazzy
                   # keep-sorted end
                   ;
               }

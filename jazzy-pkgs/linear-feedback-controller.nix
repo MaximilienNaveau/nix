@@ -2,7 +2,7 @@
   lib,
   stdenv,
 
-  src-linear-feedback-controller-jazzy,
+  fetchFromGitHub,
 
   # nativeBuildInputs
   cmake,
@@ -10,7 +10,6 @@
   python3Packages,
   ament-cmake,
   ament-cmake-auto,
-  ament-lint-auto,
   eigen3-cmake-module,
   generate-parameter-library-py,
   pluginlib,
@@ -25,11 +24,16 @@
   realtime-tools,
   rclcpp-lifecycle,
 }:
-stdenv.mkDerivation {
+stdenv.mkDerivation (finalAttrs: {
   pname = "linear-feedback-controller";
-  version = "1.0.2";
+  version = "2.0.0";
 
-  src = src-linear-feedback-controller-jazzy;
+  src = fetchFromGitHub {
+    owner = "loco-3d";
+    repo = "linear-feedback-controller";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-iolp/25VccP7knwRUOj4eQ5kGlcvWEiCfTYHkx/AUrA=";
+  };
 
   nativeBuildInputs = [
     cmake
@@ -37,7 +41,6 @@ stdenv.mkDerivation {
     python3Packages.python
     ament-cmake
     ament-cmake-auto
-    ament-lint-auto
     eigen3-cmake-module
     generate-parameter-library-py
     pluginlib
@@ -65,18 +68,14 @@ stdenv.mkDerivation {
 
   doCheck = true;
 
-  # generate_parameter_library_markdown complains that build/doc exists
-  # ref. https://github.com/PickNikRobotics/generate_parameter_library/pull/212
-  enableParallelBuilding = false;
-
   # some dependency started to leak qtPreHook
   dontWrapQtApps = true;
 
   meta = {
-    description = "RosControl linear feedback controller with pal base estimator and RosTopics external interface.";
+    description = "ROS2 control linear feedback controller. It connects Ricatti gains based controllers with the hardware through ROS2 topics.";
     homepage = "https://github.com/loco-3d/linear-feedback-controller";
     license = lib.licenses.bsd2;
     maintainers = [ lib.maintainers.nim65s ];
     platforms = lib.platforms.linux;
   };
-}
+})
